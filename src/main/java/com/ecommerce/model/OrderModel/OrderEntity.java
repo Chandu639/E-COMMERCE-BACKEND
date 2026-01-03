@@ -2,11 +2,13 @@ package com.ecommerce.model.OrderModel;
 
 import java.math.BigDecimal;
 
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+
 
 import com.ecommerce.model.UserModel.UserEntity;
 
