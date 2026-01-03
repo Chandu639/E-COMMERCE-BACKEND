@@ -1,7 +1,7 @@
 package com.ecommerce.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +11,10 @@ import com.ecommerce.model.UserModel.UserEntity;
 import com.ecommerce.repo.UserRepo.UserRepo;
 
 @Service
+@Profile("local")
+
+
+
 public class MyUserDetailsService implements UserDetailsService{
 	
 	@Autowired
