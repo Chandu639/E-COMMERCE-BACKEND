@@ -11,7 +11,7 @@ import com.ecommerce.model.UserModel.UserEntity;
 import com.ecommerce.repo.UserRepo.UserRepo;
 
 @Service
-@Profile("local")
+
 
 
 
