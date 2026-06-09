@@ -2,28 +2,25 @@ package com.ecommerce.service.ProductService;
 
 import org.slf4j.Logger;
 
+
+
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.ecommerce.dto.ProductDTO.CreateProductRequest;
 import com.ecommerce.dto.ProductDTO.ProductResponse;
 import com.ecommerce.dto.ProductDTO.UpdateProductRequest;
 import com.ecommerce.exception.product.ProductNotFoundException;
 import com.ecommerce.model.ProductModel.ProductEntity;
 import com.ecommerce.repo.ProductRepo.ProductRepo;
-import com.ecommerce.service.OrderService.OrderService;
+import com.ecommerce.service.vector.ProductVectorService;
+
 
 
 @Service
@@ -34,6 +31,9 @@ public class ProductService {
 	
 	@Autowired
 	ProductRepo repo;
+	
+	@Autowired
+	private ProductVectorService productVectorService;
 
 	public ProductResponse addProduct(CreateProductRequest request) {
 	  ProductEntity product = new ProductEntity();
@@ -41,7 +41,14 @@ public class ProductService {
 	  product.setPrice(request.getPrice());
 	  product.setCategory(request.getCategory());
 	  product.setStock(request.getStock());
+	  
+	  product.setBrand(request.getBrand());
+	  product.setDescription(request.getDescription());
 	  ProductEntity savedProduct = repo.save(product);
+	  
+	  productVectorService.vectorizeProduct(
+		        savedProduct.getProductID()
+		);
 
 	    ProductResponse response = new ProductResponse();
 	    response.setProductID(savedProduct.getProductID());
@@ -49,6 +56,8 @@ public class ProductService {
 	    response.setPrice(savedProduct.getPrice());
 	    response.setCategory(savedProduct.getCategory());
 	    response.setStock(savedProduct.getStock());
+	    response.setBrand(savedProduct.getBrand());
+	    response.setDescription(savedProduct.getDescription());
 	    response.setCreatedAt(savedProduct.getCreatedAt());
 	    response.setUpdatedAt(savedProduct.getUpdatedAt());
 	    log.info("Product created. productId={}", savedProduct.getProductID());
@@ -68,8 +77,14 @@ public class ProductService {
 	    product.setPrice(request.getPrice());
 	    product.setCategory(request.getCategory());
 	    product.setStock(request.getStock());
+	    product.setBrand(request.getBrand());
+	    product.setDescription(request.getDescription());
 
 	    ProductEntity updatedProduct = repo.save(product);
+	    
+	    productVectorService.reVectorizeProduct(
+	            updatedProduct.getProductID()
+	    );
 
 	    ProductResponse response = new ProductResponse();
 	    response.setProductID(updatedProduct.getProductID());
@@ -77,6 +92,8 @@ public class ProductService {
 	    response.setPrice(updatedProduct.getPrice());
 	    response.setCategory(updatedProduct.getCategory());
 	    response.setStock(updatedProduct.getStock());
+	    response.setBrand(updatedProduct.getBrand());
+	    response.setDescription(updatedProduct.getDescription());
 	    response.setCreatedAt(updatedProduct.getCreatedAt());
 	    response.setUpdatedAt(updatedProduct.getUpdatedAt());
 
@@ -92,6 +109,8 @@ public class ProductService {
 		ProductEntity entity=product.get();
 		
 		repo.delete(entity);
+		
+		productVectorService.deleteVector(id);
 		log.info("Product deleted. productId={}", id);
 
 		
@@ -109,6 +128,8 @@ public class ProductService {
 		    response.setPrice(savedProduct.getPrice());
 		    response.setCategory(savedProduct.getCategory());
 		    response.setStock(savedProduct.getStock());
+		    response.setBrand(savedProduct.getBrand());
+		    response.setDescription(savedProduct.getDescription());
 		    response.setCreatedAt(savedProduct.getCreatedAt());
 		    response.setUpdatedAt(savedProduct.getUpdatedAt());
 		    
@@ -139,6 +160,8 @@ public class ProductService {
 	        response.setPrice(product.getPrice());
 	        response.setCategory(product.getCategory());
 	        response.setStock(product.getStock());
+	        response.setBrand(product.getBrand());
+	        response.setDescription(product.getDescription());
 	        response.setCreatedAt(product.getCreatedAt());
 	        response.setUpdatedAt(product.getUpdatedAt());
 	        responseList.add(response);
@@ -186,6 +209,8 @@ public class ProductService {
 	        response.setPrice(product.getPrice());
 	        response.setCategory(product.getCategory());
 	        response.setStock(product.getStock());
+	        response.setBrand(product.getBrand());
+	        response.setDescription(product.getDescription());
 	        response.setCreatedAt(product.getCreatedAt());
 	        response.setUpdatedAt(product.getUpdatedAt());
 	        responseList.add(response);

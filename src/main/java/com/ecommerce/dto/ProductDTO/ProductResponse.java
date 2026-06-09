@@ -29,6 +29,11 @@ public class ProductResponse {
 	
 	private int stock;
 	
+private String brand;
+
+	
+	private String description;
+	
 	
 	private LocalDateTime createdAt;
 	

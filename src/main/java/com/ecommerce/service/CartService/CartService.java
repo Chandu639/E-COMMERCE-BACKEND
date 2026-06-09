@@ -1,6 +1,7 @@
 package com.ecommerce.service.CartService;
 import org.slf4j.Logger;
 
+
 import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 
@@ -24,7 +25,7 @@ import com.ecommerce.model.ProductModel.ProductEntity;
 import com.ecommerce.repo.CartRepo.CartRepo;
 import com.ecommerce.repo.ProductRepo.ProductRepo;
 import com.ecommerce.security.UserPrincipal;
-import com.ecommerce.service.OrderService.OrderService;
+
 
 @Service
 public class CartService {
@@ -252,6 +253,6 @@ public class CartService {
     }
 
 
-    // 🔄 DTO MAPPER (shared logic)
+   
     
 }

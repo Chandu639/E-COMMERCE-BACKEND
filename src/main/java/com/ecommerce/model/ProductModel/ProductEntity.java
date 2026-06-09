@@ -34,6 +34,12 @@ public class ProductEntity {
 	private String category;
 	
 	@Column(nullable = false)
+	private String brand;
+
+	@Column(length = 2000)
+	private String description;
+	
+	@Column(nullable = false)
 	private int stock;
 	
 	@CreationTimestamp

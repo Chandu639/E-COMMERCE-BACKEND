@@ -24,6 +24,11 @@ public class UpdateProductRequest {
 		
 		
 		private int stock;
+		
+		private String brand;
+
+		
+		private String description;
 	}
 
 

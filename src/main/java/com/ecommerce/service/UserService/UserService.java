@@ -1,12 +1,9 @@
 package com.ecommerce.service.UserService;
 import org.slf4j.Logger;
 
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +13,7 @@ import com.ecommerce.exception.user.InvalidCredentialsException;
 import com.ecommerce.exception.user.UserAlreadyExistsException;
 import com.ecommerce.exception.user.UserNotFoundException;
 import com.ecommerce.security.jwtService;
-import com.ecommerce.service.OrderService.OrderService;
+
 
 @Service
 public class UserService {

@@ -1,6 +1,7 @@
 package com.ecommerce.service.OrderService;
 import org.slf4j.Logger;
 
+
 import org.slf4j.LoggerFactory;
 
 
@@ -49,13 +50,13 @@ public class OrderService {
     private final CartRepo cartRepo;
     private final OrderRepo orderRepo;
     private final UserRepo userRepo;
-    private final ProductRepo repo;
+  
 
     public OrderService(CartRepo cartRepo, OrderRepo orderRepo, UserRepo userRepo,ProductRepo repo) {
         this.cartRepo = cartRepo;
         this.orderRepo = orderRepo;
         this.userRepo = userRepo;
-        this.repo=repo;
+       
     }
 
     // ✅ TASK 2 — PLACE ORDER

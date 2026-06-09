@@ -156,6 +156,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleGenericException(Exception ex) {
+    	
+
+    	    ex.printStackTrace();   // ADD THIS
+
+    	    ex.printStackTrace();
+
+    	    Throwable root = ex;
+    	    while(root.getCause() != null) {
+    	        root = root.getCause();
+    	    }
+
+    	    System.out.println("ROOT CAUSE = " + root.getMessage());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ApiError(

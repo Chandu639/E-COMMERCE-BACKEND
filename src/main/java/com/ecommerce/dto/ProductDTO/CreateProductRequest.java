@@ -22,5 +22,11 @@ public class CreateProductRequest {
 	
 	
 	private int stock;
+	
+	
+	private String brand;
+
+	
+	private String description;
 
 }

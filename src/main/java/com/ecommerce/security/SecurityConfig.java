@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
-public class Security {
+public class SecurityConfig {
 	
 	@Autowired
 	UserDetailsService myUserDetailsService;
@@ -30,8 +30,8 @@ public class Security {
 		return http
 				.csrf(customizer->customizer.disable())
 				.authorizeHttpRequests(request->request
-						.requestMatchers("/auth/login","/auth/register").permitAll()
-						.requestMatchers("/admin").hasRole("ADMIN")
+				.requestMatchers("/auth/login","/auth/register").permitAll()  
+						.requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.addFilterBefore( JwtFilter,UsernamePasswordAuthenticationFilter.class)
 				.build();
@@ -50,5 +50,4 @@ public class Security {
 		return provider;
 	}
 	
-
 }
