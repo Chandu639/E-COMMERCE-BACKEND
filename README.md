@@ -1,161 +1,251 @@
-🛒 E-Commerce Backend System (Spring Boot)
+# 🛒 E-Commerce Backend System with AI Recommendations
 
-A production-grade Java Spring Boot backend for an e-commerce platform, designed with real-world backend engineering principles, not toy examples.
+A production-grade Java Spring Boot backend for an e-commerce platform, designed using real-world backend engineering principles and enhanced with AI-powered product recommendations.
 
-This project focuses on correctness, transactional safety, clean architecture, and interview-ready design decisions.
+This project focuses on correctness, transactional safety, security, clean architecture, and modern AI integration using Vector Databases and Retrieval-Augmented Generation (RAG).
 
-🚀 Tech Stack
+---
 
-Java 21
+# 🚀 Tech Stack
 
-Spring Boot
+### Backend
 
-Spring Data JPA (Hibernate)
+* Java 21
+* Spring Boot
+* Spring Data JPA (Hibernate)
+* Spring Security + JWT
+* Maven
 
-Spring Security + JWT
+### Databases
 
-MySQL
+* MySQL
+* PostgreSQL
+* PgVector
 
-Maven
+### AI Stack
 
-JUnit 5 + Mockito
+* Spring AI
+* Ollama
+* nomic-embed-text Embedding Model
+* Groq API
+* Llama 3.3 70B
 
-SLF4J Logging
+### Testing & Utilities
 
-📦 Core Modules
-🔐 Authentication & Authorization
+* JUnit 5
+* Mockito
+* SLF4J Logging
 
-JWT-based authentication
+---
 
-Role-based access (USER, ADMIN)
+# 📦 Core Modules
 
-Secure user identification using Spring Security Context
+## 🔐 Authentication & Authorization
 
-No user IDs accepted from client (security-first design)
+* JWT-based authentication
+* Role-based access (USER, ADMIN)
+* Secure user identification using Spring Security Context
+* No user IDs accepted from client
+* Security-first design
 
-🛍 Product Module
+---
 
-Admin-only product creation, update, delete
+## 🛍 Product Module
 
-Public product listing with:
+* Admin-only product creation, update, delete
+* Product listing with:
 
-pagination
+  * Pagination
+  * Sorting
+  * Filtering (category, price range)
+* DTO-based architecture
+* Automatic vectorization support
 
-sorting
+---
 
-filtering (category, price range)
+## 🛒 Cart Module
 
-Clean DTO separation
+* Add / update / remove cart items
+* Quantity validation
+* Snapshot pricing
+* Idempotent operations
+* Business-level logging
 
-🛒 Cart Module
+---
 
-Add / update / remove cart items
+## 📦 Order Module
 
-Quantity validation
+* Transactional order placement
+* Cart → Order conversion
+* Order lifecycle management
+* Order history pagination
+* Optimized fetching using JOIN FETCH
+* Clear transaction boundaries
 
-Snapshot pricing (price stored at add-to-cart time)
+---
 
-Idempotent operations
+# 🤖 AI Recommendation Engine
 
-Centralized exception handling
+Built using Spring AI + Ollama + PgVector.
 
-Logging for business events
+### Features
 
-📦 Order Module
+* Product embeddings generation
+* Vector storage using PgVector
+* Semantic product search
+* Retrieval-Augmented Generation (RAG)
+* AI-powered product recommendations
+* Automatic product re-vectorization
+* Vector cleanup on product deletion
 
-Transactional order placement
+### Recommendation Flow
 
-Cart → Order conversion
+User Query
 
-Order lifecycle management
+↓
 
-Pagination for order history
+Embedding Generation
 
-Optimized fetching using JOIN FETCH
+↓
 
-Clear transaction boundaries
+PgVector Similarity Search
 
-🔁 Transactions (Deep Focus)
+↓
 
-Proper use of @Transactional
+Top Matching Products
 
-Read-only transactions for fetch operations
+↓
 
-Clear rollback rules
+LLM Context Construction
 
-External systems intentionally kept outside transactions
+↓
 
-Business operations treated as single atomic units
+AI Recommendation Response
 
-⚠️ Exception Handling (Production Style)
+### Example Queries
 
-Centralized @ControllerAdvice
+* Best laptop for students
+* Budget gaming laptop
+* Laptop for software development
+* Business laptop under 70000
 
-Domain-specific exceptions per module
+---
 
-Clean HTTP error responses
+# 🔁 Transactions
 
-No leaking internal details to clients
+Strong focus on transactional correctness.
 
-📊 Logging
+* Proper use of @Transactional
+* Atomic business operations
+* Read-only transactions where appropriate
+* Clear rollback boundaries
+* Consistency-first design
 
-SLF4J-based logging
+---
 
-Logs at service layer (not controllers)
+# ⚠️ Exception Handling
+
+Production-style exception management.
+
+* Centralized @ControllerAdvice
+* Domain-specific exceptions
+* Clean HTTP responses
+* No internal implementation leakage
+
+---
+
+# 📊 Logging
+
+SLF4J-based logging.
 
 Meaningful logs for:
 
-cart updates
+* Product operations
+* Cart updates
+* Order placement
+* Vectorization events
+* Recommendation workflow
+* Failure scenarios
 
-order placement
+---
 
-failure scenarios
-
-Designed for debugging in production environments
-
-🧪 Testing Strategy (Minimal & Intentional)
+# 🧪 Testing Strategy
 
 Tests are written for confidence, not coverage inflation.
 
-Included Tests:
+### Included Tests
 
-Service layer tests (Mockito)
+* Service Layer Tests (Mockito)
+* Repository Tests (JPA + H2)
 
-Repository test (JPA + H2)
+### Philosophy
 
-Why minimal?
+* Focus on business correctness
+* Avoid redundant tests
+* Interview-ready testing approach
 
-Focus on business correctness
+---
 
-Avoid redundant tests
+# 🧠 Design Philosophy
 
-Interview-ready testing philosophy
+* Security > Convenience
+* Correctness > Speed
+* Explicit over Implicit
+* Real-world backend thinking
+* Clean separation of concerns
+* AI integrated as a business capability, not a gimmick
 
-🧠 Design Philosophy
+---
 
-Security > Convenience
+# 📌 What This Project Demonstrates
 
-Correctness > Speed
+### Backend Engineering
 
-Explicit over implicit
+* Spring Boot Architecture
+* REST API Design
+* Transaction Management
+* Security Best Practices
+* Exception Handling
+* Clean Code Principles
 
-Real-world backend thinking
+### AI Engineering
 
-Clean separation of concerns
+* Spring AI
+* Vector Databases
+* Embeddings
+* Semantic Search
+* Retrieval-Augmented Generation (RAG)
+* LLM Integration
 
-📌 What This Project Demonstrates
+---
 
-How a real backend engineer thinks
+# 🔮 Future Enhancements
 
-How to design transactions safely
+### Backend
 
-How to structure Spring Boot projects cleanly
+* Payment Gateway Integration
+* Inventory Management
+* Email Notifications
+* Caching with Redis
 
-How to reason about failures and edge cases
+### AI
 
-How to explain backend decisions in interviews
+* Personalized Recommendations
+* Hybrid Search (SQL + Vector Search)
+* Conversational Shopping Assistant
+* Product Review Analysis
 
-📬 Author
+### Architecture
 
-Venkata Chandra Krishna
-Java Backend Developer (Spring Boot)
+* Microservices Migration
+* API Gateway
+* Service Discovery
+* Event-Driven Communication (Kafka)
+
+---
+
+# 📬 Author
+
+**Venkata Chandra Krishna**
+
+Java Backend Developer | Spring Boot | AI Applications | Distributed Systems
